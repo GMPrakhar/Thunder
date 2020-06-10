@@ -12,7 +12,7 @@ This project is still in the infant phase, hence the framework code resides comp
 #### Initialization
 You can start using Thunder by first including the `index.js` file in your document head. Then you need to create a new Thunder class.
 
-```
+```javascript
 <script>
 new Thunder(
   contextName: The context in which this thunder class will work.,
@@ -29,7 +29,7 @@ new Thunder(
 #### Example
 You can find an example file `index.html` in the repo folder. A simpler example is given below.
 
-```
+```javascript
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
