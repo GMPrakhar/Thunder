@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="index.js"></script>
+        <title>Thunder</title>
+    </head>
+    <body>
+        <div t-context="myApp">
+            Name {{Oep}}
+            <p>This is a {{Name}} and again it is {{Name}}</p>
+        </div>
+    </body>
+    <script>
+        new Thunder("myApp", {
+            Name: "Prakhar",
+            Oep: "r"
+        },{
+            init: function(){
+
+            }
+        })
+    </script>
+</html>
