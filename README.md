@@ -3,8 +3,9 @@ Thunder is a javascript framework for lightning fast rendering, and element base
 
 ## How to run
 - Clone the repo and go into the project directory.
-- run `npm install` and then `npm start` to run the default project.
+- run `npm install` and you are good to go.
 - Change index.html however you like!
+- To run the example index.html, just use `npm start`
 
 ## Documentation
 This project is still in the infant phase, hence the framework code resides completely in the `index.js` file.
