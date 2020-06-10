@@ -23,7 +23,7 @@ new Thunder(
 </script>
 ```
 
-### Directives
+#### Directives
 - `t-context` : Specifies the context of the Thunder app. All the variables and methods are valid for this context only.
 - `t-click` : Specifies the method that is called when an element is clicked.
 
