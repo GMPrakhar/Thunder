@@ -1,16 +1,17 @@
 class Thunder{
     virtualDOM;
-    variables;
-    methods;
+    variables = {};
+    methods = {};
     changeableElements = [];
     changeListenersPerVariable = {};
 
     constructor(context, variables, methods){
         this.variables = {};
         this.registerVariables(variables);
-        this.methods = methods;
+        this.registerMethods(methods);
         this.constructVirtualDOM(context);
         this.triggerInitialValues();
+        this.registerClickEvents();
     }
 
     registerVariables(variables){
@@ -28,6 +29,24 @@ class Thunder{
                 }.bind(this)
             })
         });
+    }
+
+    registerMethods(methods){
+        Object.keys(methods).forEach((method)=>{
+            this.methods[method] = methods[method].bind(this.variables);
+            if(method == 'init'){
+                methods[method].bind(this.variables)();
+            }
+        });
+    }
+
+    registerClickEvents(){
+        const clickableElements = $(`[t-click]`);
+        for(let i = 0; i < clickableElements.length; i++){
+            const element = clickableElements[i];
+            element.onclick = function(){eval('this.methods.'+$(element).attr('t-click'))}.bind(this);
+            //console.log()
+        }
     }
 
     constructVirtualDOM(context){
@@ -66,7 +85,8 @@ class Thunder{
             final.textContent = root.nodeValue;
             //console.log(final.textContent);
             if(final.textContent.includes('{{')){
-                this.changeableElements.push({type: 'inner', content: final.textContent, node: final.element});
+                this.changeableElements
+                .push({type: 'inner', content: final.textContent, node: final.element});
             }
             return final;
         }
@@ -75,7 +95,7 @@ class Thunder{
         for(let i = 0; i < root.attributes.length; i++){
             const attribute = root.attributes[i];
             rootAttrs[attribute.nodeName] = attribute.nodeValue;
-            if(attribute.contains('{{')){
+            if(attribute.nodeValue.includes('{{')){
                 this.changeableElements
                 .push({type: 'attribute', attributeName: attribute.nodeName, node: final.element});
             }
@@ -100,7 +120,7 @@ class Thunder{
                 let startPos = text.indexOf('{{');
                 while(startPos != -1){
                     let endPos = text.indexOf('}}', startPos);
-                    let variableName = text.substring(startPos+2, endPos);
+                    let variableName = text.substring(startPos+2, endPos).trim();
 
                     element.node.nodeValue = text.substring(0, startPos) +
                                             this.variables[variableName] +
@@ -116,7 +136,7 @@ class Thunder{
                         let startPos = text.indexOf('{{');
                         while(startPos != -1){
                             let endPos = text.indexOf('}}', startPos);
-                            let variableName = text.substring(startPos+2, endPos);
+                            let variableName = text.substring(startPos+2, endPos).trim();
         
                             element.node.nodeValue = text.substring(0, startPos) +
                                                     this.variables[variableName] +

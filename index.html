@@ -7,16 +7,27 @@
     <body>
         <div t-context="myApp">
             Name {{Oep}}
-            <p>This is a {{Name}} and again it is {{Name}}</p>
+            <p t-click="changeName('Prakhar'+(2+2));">This is a {{Name}} and again it is {{Name}}</p>
+            {{ Time }}
+            {{Name}}
         </div>
     </body>
     <script>
         new Thunder("myApp", {
             Name: "Prakhar",
-            Oep: "r"
+            Oep: "r",
+            Time: new Date().toLocaleTimeString()
         },{
             init: function(){
+                setInterval(()=>{
+                    this.Time = new Date().toLocaleTimeString();
+                }, 1000);
 
+                console.log('hi');
+            },
+            
+            changeName: function(newName){
+                this.Name = newName;
             }
         })
     </script>
