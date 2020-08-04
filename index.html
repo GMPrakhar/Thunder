@@ -7,7 +7,7 @@
     <body>
         <div t-context="myApp">
             Name {{Oep}}
-            <p t-click="changeName('Prakhar'+(2+2));">This is a {{Name}} and again it is {{Name}}</p>
+            <p t-click="changeName('Prakhar'+(2+2));">This is a {{Namee+  JSON.stringify({"hel":Math.pow(2,2)})}} and again it is {{Name}}</p>
             {{ Time }}
             {{Name}}
         </div>
@@ -15,6 +15,7 @@
     <script>
         new Thunder("myApp", {
             Name: "Prakhar",
+            Namee: "Prakhard",
             Oep: "r",
             Time: new Date().toLocaleTimeString()
         },{
